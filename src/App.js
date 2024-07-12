@@ -10,9 +10,9 @@ function App ()
         <Header />
       </header>
 
-      <body>
+      <main>
         <Body />
-      </body>
+      </main>
 
       <footer>
         <Footer />
