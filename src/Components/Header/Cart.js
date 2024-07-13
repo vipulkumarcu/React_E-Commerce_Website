@@ -1,43 +1,10 @@
-import { useState } from "react";
+import { useContext } from "react";
 import { Button, Modal, Table } from "react-bootstrap";
-
-const initialCartElements = [
-
-  {
-    title: 'Colors',
-    price: 100,
-    imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%201.png',
-    quantity: 2,
-  },
-  
-  {
-    title: 'Black and white Colors',
-    price: 50,
-    imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%202.png',
-    quantity: 3,
-  },
-  
-  {
-    title: 'Yellow and Black Colors',
-    price: 70,
-    imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%203.png',
-    quantity: 1,
-  }
-  
-]
+import ItemContext from "../../Context/item-context";
 
 function Cart ( props )
 {
-  const [ cartElements, setCartElements ] = useState ( initialCartElements );
-
-  function removeItem ( title )
-  {
-    const updatedCart = cartElements.filter(item => item.title !== title);
-    setCartElements ( updatedCart );
-  }
-
-  const totalPrice = cartElements.reduce ( ( total, item ) => total + item.price * item.quantity, 0 );
-
+  const context = useContext (ItemContext);
 
   return (
     <>
@@ -63,14 +30,14 @@ function Cart ( props )
 
             <tbody>
               {
-                cartElements.map (
+                context.cartItems.map (
                   ( element, index ) => (
                     <tr key = { element.title }>
                       <td> { ++index } </td>
                       <td> { element.title } </td>
                       <td> $ { element.price } </td>
                       <td> { element.quantity } </td>
-                      <td> <Button variant = "danger" onClick = { () => removeItem ( element.title ) }> Remove </Button> </td>
+                      <td> <Button variant = "danger" onClick = { () => context.removeItemFromCart ( element.title ) }> Remove </Button> </td>
                     </tr>
                   )
                 )
@@ -80,7 +47,7 @@ function Cart ( props )
             <tfoot>
               <tr>
                 <td colSpan = { 2 }> Total Price </td>
-                <td> $ { totalPrice } </td>
+                <td> $ { context.cartPrice } </td>
               </tr>
             </tfoot>
 
@@ -90,7 +57,7 @@ function Cart ( props )
 
         <Modal.Footer>
           <Button variant="secondary" onClick = { props.toggleCart }> Close </Button>
-          <Button variant="primary" onClick = { props.toggleCart }> Purchase </Button>
+          <Button variant="primary" onClick = { () => { alert ("Purchase Successful"); props.toggleCart (); } }> Purchase </Button>
         </Modal.Footer>
 
       </Modal>

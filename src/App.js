@@ -7,11 +7,11 @@ function App ()
   return (
     <>
       <header>
-        <Header />
+        <Header/>
       </header>
 
       <main>
-        <Body />
+        <Body/>
       </main>
 
       <footer>

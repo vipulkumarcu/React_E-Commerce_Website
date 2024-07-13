@@ -1,15 +1,11 @@
-import { useState } from "react";
+import { useContext } from "react";
 import { Button, Card, Container, Nav, Navbar } from "react-bootstrap";
 import Cart from "./Cart";
+import ItemContext from "../../Context/item-context";
 
 function Header ()
 {
-  const [ toggleCart, setTogglecart ] = useState ( false );
-
-  function toggleCartFunc ()
-  {
-    setTogglecart ( prevvalue => !prevvalue );
-  }
+  const context = useContext ( ItemContext );
 
   return (
     <div>
@@ -26,9 +22,9 @@ function Header ()
             </Nav>
           </Navbar.Collapse>
 
-          <Button variant = "outline-info" onClick = { toggleCartFunc }> Cart </Button>
+          <Button variant = "outline-info" onClick = { context.toggleCartHandler }> Cart <sup> { context.cartItems.length } </sup> </Button>
           {
-            toggleCart && <Cart toggleCart={toggleCartFunc} />
+            context.toggleCart && <Cart toggleCart = { context.toggleCartHandler } />
           }  
 
         </Container>
