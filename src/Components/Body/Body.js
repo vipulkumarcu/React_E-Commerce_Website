@@ -2,30 +2,34 @@ import { Button, Col, Container, Row } from "react-bootstrap";
 import Product from "./Product";
 import { useContext } from "react";
 import ItemContext from "../../Context/item-context";
+import Album1 from "../../Assets/Album 1.png"
+import Album2 from "../../Assets/Album 2.png"
+import Album3 from "../../Assets/Album 3.png"
+import Album4 from "../../Assets/Album 4.png"
 
 const productsArr = [
   {
     title: 'Colors',
     price: 100,
-    imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%201.png',
+    imageUrl: Album1,
   },
   
   {
     title: 'Black and white Colors',
     price: 50,
-    imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%202.png',
+    imageUrl: Album2,
   },
   
   {
     title: 'Yellow and Black Colors',
     price: 70,
-    imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%203.png',
+    imageUrl: Album3,
   },
   
   {
     title: 'Blue Color',
     price: 100,
-    imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%204.png',
+    imageUrl: Album4,
   }
 ]
   

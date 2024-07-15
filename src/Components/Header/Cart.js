@@ -57,7 +57,7 @@ function Cart ( props )
 
         <Modal.Footer>
           <Button variant = "dark" onClick = { props.toggleCart }> Close </Button>
-          <Button variant = "warning" onClick = { () => { alert ("Purchase Successful"); props.toggleCart (); } }> Purchase </Button>
+          <Button variant = "success" onClick = { () => { alert ("Purchase Successful"); props.toggleCart (); } }> Purchase </Button>
         </Modal.Footer>
 
       </Modal>

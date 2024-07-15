@@ -24,7 +24,7 @@ function Product ( props )
           <Row>
             <Col className = "text-start"> Price: $ { props.product.price } </Col>
             <Col className = "text-end">
-              <Button variant = "primary" onClick = { addToCart }> Add To Cart </Button>
+              <Button variant = "warning" onClick = { addToCart }> Add To Cart </Button>
             </Col>
           </Row>
         </Card.Body>

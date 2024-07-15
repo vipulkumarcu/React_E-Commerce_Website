@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import About from "./Components/Pages/About";
 import Home from "./Components/Pages/Home";
+import Store from "./Components/Pages/Store";
 
 function App ()
 {
@@ -12,9 +13,13 @@ function App ()
         element: <Home />
       },
       {
-        path: "/About",
+        path: "/store",
+        element: <Store />
+      },
+      {
+        path: "/about",
         element: <About />
-      }
+      },
     ]
   )
   return (

@@ -1,6 +1,7 @@
 import { Container } from "react-bootstrap";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
+import Band from "../../Assets/Band Members.png"
 
 function About ()
 {
@@ -11,10 +12,10 @@ function About ()
       <Container className = "mt-4">
 
         <img
-          src="https://prasadyash2411.github.io/ecom-website/img/Band%20Members.png"
-          alt="Band Members"
-          className="img-fluid about-image float-start me-3 mb-3"
-          style={{ width: "200px", height: "200px", borderRadius: "50%" }}
+          src = { Band }
+          alt = "Band Members"
+          className = "img-fluid about-image float-start me-3 mb-3"
+          style = { { width: "200px", height: "200px", borderRadius: "50%" } }
         />
         
         <p>
