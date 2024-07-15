@@ -1,23 +1,26 @@
-import Body from "./Components/Body/Body";
-import Footer from "./Components/Footer/Footer";
-import Header from "./Components/Header/Header";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
+import About from "./Components/Pages/About";
+import Home from "./Components/Pages/Home";
 
 function App ()
 {
+  const router = createBrowserRouter (
+    [
+      {
+        path: "/",
+        element: <Home />
+      },
+      {
+        path: "/About",
+        element: <About />
+      }
+    ]
+  )
   return (
-    <>
-      <header>
-        <Header/>
-      </header>
-
-      <main>
-        <Body/>
-      </main>
-
-      <footer>
-        <Footer />
-      </footer>
-    </>
+    <RouterProvider router = { router }>
+      
+    </RouterProvider>
   );
 }
 

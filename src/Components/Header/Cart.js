@@ -56,8 +56,8 @@ function Cart ( props )
         </Modal.Body>
 
         <Modal.Footer>
-          <Button variant="secondary" onClick = { props.toggleCart }> Close </Button>
-          <Button variant="primary" onClick = { () => { alert ("Purchase Successful"); props.toggleCart (); } }> Purchase </Button>
+          <Button variant = "dark" onClick = { props.toggleCart }> Close </Button>
+          <Button variant = "warning" onClick = { () => { alert ("Purchase Successful"); props.toggleCart (); } }> Purchase </Button>
         </Modal.Footer>
 
       </Modal>

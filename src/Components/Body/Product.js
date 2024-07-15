@@ -6,7 +6,7 @@ function Product ( props )
 {
   const context = useContext ( ItemContext );
 
-  function addTocart ()
+  function addToCart ()
   {
     const item = {
       title: props.product.title,
@@ -18,19 +18,17 @@ function Product ( props )
 
   return (
     <Container style = { { margin: "10px" } }>
-
-      <Card style = { { width: "15rem" } }>
-        <Card.Img variant = "top" src = { props.product.imageUrl } />
+      <Card style = { { width: "18rem", margin: "auto" } }>
+        <Card.Img variant = "top" src = { props.product.imageUrl } className = "m-auto" />
+        <Card.Body>
+          <Row>
+            <Col className = "text-start"> Price: $ { props.product.price } </Col>
+            <Col className = "text-end">
+              <Button variant = "primary" onClick = { addToCart }> Add To Cart </Button>
+            </Col>
+          </Row>
+        </Card.Body>
       </Card>
-
-      <Row>
-        <Col>  Price: $. { props.product.price } </Col>
-        <Col>
-          <Button variant = "primary" onClick = { addTocart }> Add To Cart </Button>
-        </Col>
-      </Row>
-      
-
     </Container>
   )
 }

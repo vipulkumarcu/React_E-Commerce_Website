@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { Button, Card, Container, Nav, Navbar } from "react-bootstrap";
 import Cart from "./Cart";
 import ItemContext from "../../Context/item-context";
+import { Link } from "react-router-dom";
 
 function Header ()
 {
@@ -16,9 +17,9 @@ function Header ()
 
           <Navbar.Collapse id="basic-navbar-nav"> 
             <Nav className="me-auto">
-              <Nav.Link href = "#home"> HOME </Nav.Link>
-              <Nav.Link href = "#link"> STORE </Nav.Link>
-              <Nav.Link href = "#about"> ABOUT </Nav.Link>  
+            <Nav.Link as = { Link } to = "/"> HOME </Nav.Link>
+              <Nav.Link as = { Link } to = "/store"> STORE </Nav.Link>
+              <Nav.Link as = { Link } to = "/about"> ABOUT </Nav.Link> 
             </Nav>
           </Navbar.Collapse>
 
