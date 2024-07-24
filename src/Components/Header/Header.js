@@ -20,6 +20,7 @@ function Header ()
             <Nav.Link as = { Link } to = "/"> HOME </Nav.Link>
               <Nav.Link as = { Link } to = "/store"> STORE </Nav.Link>
               <Nav.Link as = { Link } to = "/about"> ABOUT </Nav.Link> 
+              <Nav.Link as = { Link } to = "/contact"> CONTACT US </Nav.Link> 
             </Nav>
           </Navbar.Collapse>
 

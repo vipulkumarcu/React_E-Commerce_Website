@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import About from "./Components/Pages/About";
 import Home from "./Components/Pages/Home";
 import Store from "./Components/Pages/Store";
+import Contact from "./Components/Pages/Contact";
 
 function App ()
 {
@@ -19,6 +20,10 @@ function App ()
       {
         path: "/about",
         element: <About />
+      },
+      {
+        path: "/contact",
+        element: <Contact />
       },
     ]
   )
