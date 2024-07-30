@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { Button, Card, Container, Nav, Navbar } from "react-bootstrap";
+import { Badge, Button, Card, Container, Nav, Navbar } from "react-bootstrap";
 import Cart from "./Cart";
 import ItemContext from "../../Context/item-context";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function Header ()
 {
@@ -15,16 +15,21 @@ function Header ()
 
         <Container>
 
-          <Navbar.Collapse id="basic-navbar-nav"> 
-            <Nav className="me-auto">
-            <Nav.Link as = { Link } to = "/"> HOME </Nav.Link>
-              <Nav.Link as = { Link } to = "/store"> STORE </Nav.Link>
-              <Nav.Link as = { Link } to = "/about"> ABOUT </Nav.Link> 
-              <Nav.Link as = { Link } to = "/contact"> CONTACT US </Nav.Link> 
+          <Navbar.Collapse id = "basic-navbar-nav">
+
+            <Nav className = "mx-auto">
+              <Nav.Link as = { NavLink } to = "/" exact activeClassName="active" style = { { margin: "0 15px", fontSize: "20px" } }> HOME </Nav.Link>
+              <Nav.Link as = { NavLink } to = "/store" activeClassName="active" style = { { margin: "0 15px", fontSize: "20px" } }> STORE </Nav.Link>
+              <Nav.Link as = { NavLink } to = "/about" activeClassName="active" style = { { margin: "0 15px", fontSize: "20px" } }> ABOUT </Nav.Link>
+              <Nav.Link as = { NavLink } to = "/contact" activeClassName="active" style = { { margin: "0 15px", fontSize: "20px" } }> CONTACT US </Nav.Link>
             </Nav>
+
           </Navbar.Collapse>
 
-          <Button variant = "outline-info" onClick = { context.toggleCartHandler }> Cart <sup> { context.cartItems.length } </sup> </Button>
+          <Button variant = "outline-info" onClick = { context.toggleCartHandler } >
+            Cart &nbsp;
+            <Badge pill bg = "dark"> { context.cartItems.length } </Badge>
+          </Button>
           {
             context.toggleCart && <Cart toggleCart = { context.toggleCartHandler } />
           }  
@@ -34,7 +39,7 @@ function Header ()
       </Navbar>
 
       <Card style = { { background: "#777777", fontFamily: "Times New Roman", color: "white", padding: "40px", textAlign: "center", marginTop: "1px" } } >
-        <Card.Title> <h1> The Generics </h1> </Card.Title>
+        <Card.Title> <h1 style = { { fontSize: "70px" } }> The Generics </h1> </Card.Title>
       </Card>
 
     </div>

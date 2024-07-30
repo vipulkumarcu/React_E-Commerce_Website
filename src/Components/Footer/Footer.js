@@ -10,18 +10,15 @@ function Footer ()
       
       <Row>
 
-        <Col xs = { 6 } style = { { fontSize: "50px" } }> The Generics </Col>
+        <Col xs = { 6 } style = { { fontSize: "70px" } }> The Generics </Col>
 
-        <Col xs = { 2 } className = "text-center">
-          <a href="#"> <FontAwesomeIcon icon = { faYoutube } size = "2x" /> </a>
-        </Col>
+        <Col xs = { 6 } className = "text-center" style = { { marginTop: "35px" } }>
+        
+          <a href="#" style = { { margin: "40px" } } > <FontAwesomeIcon icon = { faYoutube } size = "2x" /> </a>
+        
+          <a href="#" style = { { margin: "40px" } } > <FontAwesomeIcon icon = { faSpotify } size = "2x" /> </a>
 
-        <Col xs = { 2 } className="text-center">
-          <a href="#"> <FontAwesomeIcon icon = { faSpotify } size = "2x" /> </a>
-        </Col>
-
-        <Col xs = { 2 } className="text-center">
-          <a href="#"> <FontAwesomeIcon icon = { faShoppingCart } size = "2x" /> </a>
+          <a href="#" style = { { margin: "40px" } } > <FontAwesomeIcon icon = { faShoppingCart } size = "2x" /> </a>
         </Col>
 
       </Row>

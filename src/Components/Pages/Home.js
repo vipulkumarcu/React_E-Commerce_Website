@@ -1,12 +1,28 @@
-import { Button, Col, Container, Row } from "react-bootstrap";
-import Footer from "../Footer/Footer";
-import Header from "../Header/Header";
+import { useState } from "react";
+import { Alert, Button, Col, Container, Row } from "react-bootstrap";
 
 function Home ()
 {
+  const [ alertMessage, setAlertMessage ] = useState ( "" );
+  const [ alertVariant, setAlertVariant ] = useState ( "danger" );
+
+  function submitHandler ()
+  {
+    setAlertMessage ( "Tickets to this tour are not available at the moment." );
+    setAlertVariant ( "secondary" );
+  }
+
   return (
     <>
-      <Header />
+
+      {
+        alertMessage && 
+        (
+          <Alert variant = { alertVariant } onClose = { () => setAlertMessage ( "" ) } dismissible >
+            { alertMessage }
+          </Alert>
+        )
+      }
 
       <Container className = "m-5"  style = { { textAlign: "center" } }>
 
@@ -19,7 +35,7 @@ function Home ()
           <Col> DETROIT, MI </Col>
           <Col> DTE ENERGY MUSIC THEATRE </Col>
           <Col>
-            <Button variant = "primary"> Buy Tickets </Button>
+            <Button variant = "outline-info" onClick = { submitHandler }> Buy Tickets </Button>
           </Col>
         </Row>
 
@@ -28,7 +44,7 @@ function Home ()
           <Col> TORONTO,ON </Col>
           <Col> BUDWEISER STAGE </Col>
           <Col>
-            <Button variant = "primary"> Buy Tickets </Button>
+            <Button variant = "outline-info" onClick = { submitHandler }> Buy Tickets </Button>
           </Col>
         </Row>
 
@@ -37,7 +53,7 @@ function Home ()
           <Col> BRISTOW, VA </Col>
           <Col> JIGGY LUBE LIVE </Col>
           <Col>
-            <Button variant = "primary"> Buy Tickets </Button>
+            <Button variant = "outline-info" onClick = { submitHandler }> Buy Tickets </Button>
           </Col>
         </Row>
 
@@ -46,7 +62,7 @@ function Home ()
           <Col> PHOENIX, AZ </Col>
           <Col> AK-CHIN PAVILION </Col>
           <Col>
-            <Button variant = "primary"> Buy Tickets </Button>
+            <Button variant = "outline-info" onClick = { submitHandler }> Buy Tickets </Button>
           </Col>
         </Row>
 
@@ -55,7 +71,7 @@ function Home ()
           <Col> LAS VEGAS, NV </Col>
           <Col> T-MOBILE ARENA </Col>
           <Col>
-            <Button variant = "primary"> Buy Tickets </Button>
+            <Button variant = "outline-info" onClick = { submitHandler }> Buy Tickets </Button>
           </Col>
         </Row>
 
@@ -64,13 +80,12 @@ function Home ()
           <Col> CONCORD, CA </Col>
           <Col> CONCORD PAVILION </Col>
           <Col>
-            <Button variant = "primary"> Buy Tickets </Button>
+            <Button variant = "outline-info" onClick = { submitHandler }> Buy Tickets </Button>
           </Col>
         </Row>
         
       </Container>
 
-      <Footer />
     </>
   )
 }

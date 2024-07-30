@@ -1,7 +1,5 @@
 import { useState } from "react";
-import Footer from "../Footer/Footer";
-import Header from "../Header/Header";
-import { Button, Form } from "react-bootstrap";
+import { Alert, Button, Form } from "react-bootstrap";
 
 function Contact ( props )
 {
@@ -9,10 +7,19 @@ function Contact ( props )
   const [ email, setEmail ] = useState ( "" );
   const [ phone, setPhone ] = useState ( "" );
   const [ query, setQuery ] = useState ( "" );
+  const [ alertMessage, setAlertMessage ] = useState ( "" );
+  const [ alertVariant, setAlertVariant ] = useState ( "danger" );
 
   async function onSubmitHandler ( event )
   {
     event.preventDefault ();
+
+    if ( !name || !email || isNaN ( phone ) || !query )
+    {
+      setAlertMessage ( "Please enter the correct details." );
+      setAlertVariant ( "danger" );
+      return;
+    }
 
     const contact_query = {
       Name: name,
@@ -33,7 +40,8 @@ function Contact ( props )
 
     if ( response.ok )
     {
-      alert ( "Your Query is submitted. We will contact you soon..." );
+      setAlertMessage ( "Your query is submitted. We will contact you soon..." );
+      setAlertVariant ( "success" );
       setName ( "" );
       setEmail ( "" );
       setPhone ( "" );
@@ -42,41 +50,49 @@ function Contact ( props )
     
     else
     {
-      alert ( 'Failed to submit query' );
+      setAlertMessage ( "Failed to submit query." );
+      setAlertVariant ( "danger" );
     }
   }
 
   return (
     <>
-      <Header />
+
+      {
+        alertMessage && 
+        (
+          <Alert variant = { alertVariant } onClose = { () => setAlertMessage ( "" ) } dismissible >
+            { alertMessage }
+          </Alert>
+        )
+      }
 
       <Form onSubmit = { onSubmitHandler } >
 
-        <Form.Group className = "mb-3" controlId="exampleForm.ControlInput1">
-          <Form.Label> Name </Form.Label>
-          <Form.Control type= "text" value = { name } onChange = { ( e ) => ( setName ( e.target.value ) ) } />
-        </Form.Group>
+        <Form.Floating className = "mb-3">
+          <Form.Control id = "floatingInputCustom" type= "text" value = { name } onChange = { ( e ) => ( setName ( e.target.value ) ) } placeholder = "Enter your name" />
+          <label htmlFor = "floatingInputCustom"> Name </label>
+        </Form.Floating>
 
-        <Form.Group className = "mb-3" controlId="exampleForm.ControlInput1">
-          <Form.Label> Email address </Form.Label>
-          <Form.Control type = "email" value = { email } onChange = { ( e ) => ( setEmail ( e.target.value ) ) }/>
-        </Form.Group>
+        <Form.Floating className = "mb-3">
+          <Form.Control id = "floatingInputCustom" type = "email" value = { email } onChange = { ( e ) => ( setEmail ( e.target.value ) ) } placeholder = "Enter your email" />
+          <label htmlFor = "floatingInputCustom"> Email address </label>
+        </Form.Floating>
 
-        <Form.Group className = "mb-3" controlId="exampleForm.ControlInput1">
-          <Form.Label> Phone Number </Form.Label>
-          <Form.Control type = "text" value = { phone } onChange = { ( e ) => ( setPhone ( e.target.value ) ) } />
-        </Form.Group>
+        <Form.Floating className = "mb-3">
+          <Form.Control id = "floatingInputCustom" type = "text" value = { phone } onChange = { ( e ) => ( setPhone ( e.target.value ) ) } placeholder = "Enter your phone number" />
+          <label htmlFor = "floatingInputCustom"> Contact Number </label>
+        </Form.Floating>
 
-        <Form.Group className = "mb-3" controlId="exampleForm.ControlTextarea1">
-          <Form.Label> Query (If Any) </Form.Label>
-          <Form.Control as = "textarea" rows = { 3 } value = { query } onChange = { ( e ) => ( setQuery ( e.target.value ) ) } />
-        </Form.Group>
+        <Form.Floating className = "mb-3">
+          <Form.Control id = "floatingInputCustom" as = "textarea" rows = { 3 } value = { query } onChange = { ( e ) => ( setQuery ( e.target.value ) ) } placeholder = "Enter your query here" style = { { height: "100px" } } />
+          <label htmlFor = "floatingInputCustom"> Query </label>
+        </Form.Floating>
 
-        <Button type = "submit"> Contact </Button>
+        <Button type = "submit" variant = "outline-primary"> Contact </Button>
 
       </Form>
 
-      <Footer />
     </>
   )
 }

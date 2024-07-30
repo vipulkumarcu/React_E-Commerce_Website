@@ -1,4 +1,4 @@
-import { Button, Col, Container, Row } from "react-bootstrap";
+import { Badge, Button, Col, Container, Row } from "react-bootstrap";
 import Product from "./Product";
 import { useContext } from "react";
 import ItemContext from "../../Context/item-context";
@@ -24,7 +24,10 @@ function Body ()
 
       <Row>
         <Col style = { { textAlign: "center", margin: "25px" } }>
-          <Button variant = "secondary" onClick = { context.toggleCartHandler } > See Cart </Button>
+          <Button variant = "outline-dark" onClick = { context.toggleCartHandler } > 
+            See Cart &nbsp;
+            <Badge pill bg = "info"> { context.cartItems.length } </Badge>
+          </Button>
         </Col>
       </Row>
 

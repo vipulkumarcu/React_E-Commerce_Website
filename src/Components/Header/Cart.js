@@ -37,7 +37,7 @@ function Cart ( props )
                       <td> { element.title } </td>
                       <td> $ { element.price } </td>
                       <td> { element.quantity } </td>
-                      <td> <Button variant = "danger" onClick = { () => context.removeItemFromCart ( element.title ) }> Remove </Button> </td>
+                      <td> <Button variant = "outline-danger" onClick = { () => context.removeItemFromCart ( element.title ) }> Remove </Button> </td>
                     </tr>
                   )
                 )
@@ -56,8 +56,8 @@ function Cart ( props )
         </Modal.Body>
 
         <Modal.Footer>
-          <Button variant = "dark" onClick = { props.toggleCart }> Close </Button>
-          <Button variant = "success" onClick = { () => { alert ("Purchase Successful"); props.toggleCart (); } }> Purchase </Button>
+          <Button variant = "outline-dark" onClick = { props.toggleCart }> Close </Button>
+          <Button variant = "outline-success" onClick = { () => { alert ("Purchase Successful"); props.toggleCart (); } }> Purchase </Button>
         </Modal.Footer>
 
       </Modal>
