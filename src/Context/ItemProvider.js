@@ -1,8 +1,38 @@
 import { useState } from "react";
 import ItemContext from "./item-context";
+import Album1 from "../Assets/Album 1.png"
+import Album2 from "../Assets/Album 2.png"
+import Album3 from "../Assets/Album 3.png"
+import Album4 from "../Assets/Album 4.png"
 
 function ItemProvider ( props )
 {
+  const productsArr = [
+    {
+      title: 'Album1',
+      price: 100,
+      imageUrl: Album1,
+    },
+    
+    {
+      title: 'Album2',
+      price: 50,
+      imageUrl: Album2,
+    },
+    
+    {
+      title: 'Album3',
+      price: 70,
+      imageUrl: Album3,
+    },
+    
+    {
+      title: 'Album4',
+      price: 100,
+      imageUrl: Album4,
+    }
+  ]
+
   const [ cartItems, setCartItems ] = useState ( [] );
   const [ cartQuantity, setCartQuantity ] = useState ( 0 );
   const [ cartPrice, setCartPrice ] = useState ( 0 );
@@ -61,14 +91,15 @@ function ItemProvider ( props )
   }
 
   const itemContext = {
-      cartItems,
-      cartQuantity,
-      cartPrice,
-      toggleCart,
-      addItemToCart,
-      removeItemFromCart,
-      toggleCartHandler
-    }
+    productsArr,
+    cartItems,
+    cartQuantity,
+    cartPrice,
+    toggleCart,
+    addItemToCart,
+    removeItemFromCart,
+    toggleCartHandler
+  }
 
   return (
     <ItemContext.Provider value = { itemContext }>

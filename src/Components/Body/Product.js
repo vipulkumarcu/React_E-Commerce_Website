@@ -1,19 +1,13 @@
-import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
-import ItemContext from "../../Context/item-context";
 
 function Product ( props )
 {
-  const context = useContext ( ItemContext );
+  const navigate = useNavigate ();
 
-  function addToCart ()
+  function viewProduct ()
   {
-    const item = {
-      title: props.product.title,
-      price: props.product.price,
-    }
-
-    context.addItemToCart ( item );
+    navigate (`/product-details/${ props.product.title }` );
   }
 
   return (
@@ -22,9 +16,9 @@ function Product ( props )
         <Card.Img variant = "top" src = { props.product.imageUrl } className = "m-auto" />
         <Card.Body>
           <Row>
-            <Col className = "text-start"> Price: $ { props.product.price } </Col>
-            <Col className = "text-end">
-              <Button variant = "warning" onClick = { addToCart }> Add To Cart </Button>
+            <Col className = "text-start" xs = { 5 }> Price: $ { props.product.price } </Col>
+            <Col className = "text-end" xs = { 7 }>
+              <Button variant = "warning" onClick = { viewProduct }> View Product </Button>
             </Col>
           </Row>
         </Card.Body>
