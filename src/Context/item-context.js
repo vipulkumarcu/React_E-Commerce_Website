@@ -6,6 +6,10 @@ const ItemContext = React.createContext (
     totalQuantity: null,
     totalPrice: null,
     toggleCart: null,
+    token: "",
+    isLoggedIn: false,
+    login: ( token ) => {},
+    logout: () => {},
     addItemToCart: ( item ) => {},
     removeItemFromCart: ( id ) => {},
     toggleCartHandler: () => {}

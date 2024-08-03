@@ -22,6 +22,7 @@ function Header ()
               <Nav.Link as = { NavLink } to = "/store" activeClassName="active" style = { { margin: "0 15px", fontSize: "20px" } }> STORE </Nav.Link>
               <Nav.Link as = { NavLink } to = "/about" activeClassName="active" style = { { margin: "0 15px", fontSize: "20px" } }> ABOUT </Nav.Link>
               <Nav.Link as = { NavLink } to = "/contact" activeClassName="active" style = { { margin: "0 15px", fontSize: "20px" } }> CONTACT US </Nav.Link>
+              <Nav.Link as = { NavLink } to = "/login" activeClassName="active" style = { { margin: "0 15px", fontSize: "20px" } }> LOGIN </Nav.Link>
             </Nav>
 
           </Navbar.Collapse>
