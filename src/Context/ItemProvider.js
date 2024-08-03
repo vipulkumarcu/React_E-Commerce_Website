@@ -39,8 +39,10 @@ function ItemProvider ( props )
   const [ toggleCart, setTogglecart ] = useState ( false );
   const initialToken = localStorage.getItem ( "token" );
   const[ token, setToken ] = useState ( initialToken );
+  const[ userIsLoggedIn, setUserIsLoggedIn ] = useState ( false );
 
-  const userIsLoggedIn = !!token;
+  console.log("context", userIsLoggedIn);
+  
 
   function toggleCartHandler ()
   {
@@ -50,13 +52,21 @@ function ItemProvider ( props )
   function loginHandler ( token )
   {
     setToken ( token );
-    localStorage.setItem ( "token", token );
+    localStorage.setItem ( "Token", token );
+
+    setUserIsLoggedIn ( ( prev ) => !prev );
+    console.log("login", userIsLoggedIn);
+
+    localStorage.setItem ( "Login Status", !userIsLoggedIn );
   }
 
   function logoutHandler ()
   {
     setToken ( null );
     localStorage.removeItem ( "token" );
+    
+    setUserIsLoggedIn ( ( prev ) => !prev );
+    localStorage.setItem ( "Login Status", userIsLoggedIn );
   }
 
   function addItemToCart ( item )

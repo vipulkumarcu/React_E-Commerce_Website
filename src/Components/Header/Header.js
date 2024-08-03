@@ -7,6 +7,9 @@ import { NavLink } from "react-router-dom";
 function Header ()
 {
   const context = useContext ( ItemContext );
+  const userIsLoggedIn = localStorage.getItem ( "Login Status" );
+  console.log("header", userIsLoggedIn);
+  
 
   return (
     <div>
@@ -19,7 +22,9 @@ function Header ()
 
             <Nav className = "mx-auto">
               <Nav.Link as = { NavLink } to = "/" exact activeClassName="active" style = { { margin: "0 15px", fontSize: "20px" } }> HOME </Nav.Link>
-              <Nav.Link as = { NavLink } to = "/store" activeClassName="active" style = { { margin: "0 15px", fontSize: "20px" } }> STORE </Nav.Link>
+              {
+                <Nav.Link as = { NavLink } to = { userIsLoggedIn ? "/store" : "/login"} activeClassName="active" style = { { margin: "0 15px", fontSize: "20px" } }> STORE </Nav.Link>
+              }
               <Nav.Link as = { NavLink } to = "/about" activeClassName="active" style = { { margin: "0 15px", fontSize: "20px" } }> ABOUT </Nav.Link>
               <Nav.Link as = { NavLink } to = "/contact" activeClassName="active" style = { { margin: "0 15px", fontSize: "20px" } }> CONTACT US </Nav.Link>
               <Nav.Link as = { NavLink } to = "/login" activeClassName="active" style = { { margin: "0 15px", fontSize: "20px" } }> LOGIN </Nav.Link>
