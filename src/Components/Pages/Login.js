@@ -1,5 +1,5 @@
 import { useState, useRef, useContext } from "react";
-import { Alert, Button, Form } from "react-bootstrap";
+import { Alert, Button, Container, Form } from "react-bootstrap";
 import ItemContext from "../../Context/item-context";
 import { useNavigate } from "react-router-dom";
 
@@ -14,6 +14,8 @@ function Login ()
 
   const [ error, setError ] = useState ( null );
   const [ isLoading, setIsLoading ] = useState ( false );
+  const [keepLoggedIn, setKeepLoggedIn] = useState ( false );
+  const [userIsLoggedIn, setUserIsLoggedIn] = useState ( localStorage.getItem ( "Login Status" ) );
 
   async function submitHandler ( event )
   {
@@ -43,14 +45,14 @@ function Login ()
         }
       );
 
-      const data = await response.json ();
+      const data = await response.json ();    
 
       if ( !response.ok )
       {
         throw new Error ( data.error.message || "Failed to authenticate." );
       }
 
-      context.loginHandler ( data.idToken );
+      context.loginHandler ( data.idToken, data.email );
 
       navigate ( "/store" );
     }
@@ -64,35 +66,47 @@ function Login ()
   }
 
   return (
-    <Form onSubmit = { submitHandler }>
+    <>
+      <Form onSubmit = { submitHandler }>
 
-      {
-        error && <Alert variant = "danger"> { error } </Alert>
-      }
+        {
+          error && <Alert variant = "danger" dismissible> { error } </Alert>
+        }
 
-      { 
-        isLoading && <Alert variant = "info"> Loggin In... </Alert>
-      }
+        { 
+          isLoading && <Alert variant = "info" dismissible> Loggin In... </Alert>
+        }
 
-      <Form.Floating className = "mb-3">
-        <Form.Control size="lg" id = "floatingInputCustom" type = "email" ref = { inputEmailRef } placeholder = "Enter your email" required/>
-        <label htmlFor = "floatingInputCustom"> Email address </label>
-      </Form.Floating>
+        <Form.Floating className = "mb-3">
+          <Form.Control size="lg" id = "floatingInputCustom" type = "email" ref = { inputEmailRef } placeholder = "Enter your email" required/>
+          <label htmlFor = "floatingInputCustom"> Email address </label>
+        </Form.Floating>
 
-      <Form.Floating className = "mb-3">
-        <Form.Control size="lg" id = "floatingInputCustom" type = "password" ref = { inputPasswordRef } placeholder = "Enter your password" required/>
-        <label htmlFor = "floatingInputCustom"> Password </label>
-      </Form.Floating>
-      
-      {/* <Form.Group className = "mb-3" controlId = "formBasicCheckbox">
-        <Form.Check type = "checkbox" label = "Keep me Logged In" />
-      </Form.Group> */}
-      
-      <Button variant = "outline-primary" type = "submit" disabled = { isLoading }>
-        Login
-      </Button>
+        <Form.Floating className = "mb-3">
+          <Form.Control size="lg" id = "floatingInputCustom" type = "password" ref = { inputPasswordRef } placeholder = "Enter your password" required/>
+          <label htmlFor = "floatingInputCustom"> Password </label>
+        </Form.Floating>
 
-    </Form>
+        {
+          !userIsLoggedIn &&
+          <Form.Group className = "mb-3" controlId = "formBasicCheckbox">
+            <Form.Check type = "checkbox" label = "Keep me Logged In" checked = { keepLoggedIn } onChange = { ( e ) => setKeepLoggedIn ( e.target.checked ) } />
+          </Form.Group>
+        }
+        
+        <Button variant = "outline-primary" type = "submit" disabled = { isLoading }>  
+          { userIsLoggedIn ? 'Signup' : 'Login' }
+        </Button>
+
+      </Form>
+
+      <Container style = { { textAlign: "center", padding: "15px" } }>
+        <Button variant = "outline-primary" type = "submit" disabled = { isLoading } onClick = { () => setUserIsLoggedIn ( prev => !prev ) } >
+        { userIsLoggedIn ? 'Login with existing account' : 'Create new account' }
+        </Button>
+      </Container>
+
+    </>
   )
 }
 

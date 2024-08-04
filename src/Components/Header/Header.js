@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Badge, Button, Card, Container, Nav, Navbar } from "react-bootstrap";
+import { Badge, Button, Card, Col, Container, Nav, Navbar, Row } from "react-bootstrap";
 import Cart from "./Cart";
 import ItemContext from "../../Context/item-context";
 import { NavLink } from "react-router-dom";
@@ -7,9 +7,7 @@ import { NavLink } from "react-router-dom";
 function Header ()
 {
   const context = useContext ( ItemContext );
-  const userIsLoggedIn = localStorage.getItem ( "Login Status" );
-  console.log("header", userIsLoggedIn);
-  
+  const userIsLoggedIn = localStorage.getItem ( "Login Status" ); 
 
   return (
     <div>
@@ -27,15 +25,34 @@ function Header ()
               }
               <Nav.Link as = { NavLink } to = "/about" activeClassName="active" style = { { margin: "0 15px", fontSize: "20px" } }> ABOUT </Nav.Link>
               <Nav.Link as = { NavLink } to = "/contact" activeClassName="active" style = { { margin: "0 15px", fontSize: "20px" } }> CONTACT US </Nav.Link>
-              <Nav.Link as = { NavLink } to = "/login" activeClassName="active" style = { { margin: "0 15px", fontSize: "20px" } }> LOGIN </Nav.Link>
+              {
+                !userIsLoggedIn &&
+                <Nav.Link as = { NavLink } to = "/login" activeClassName="active" style = { { margin: "0 15px", fontSize: "20px" } }> LOGIN </Nav.Link>
+              }
             </Nav>
 
           </Navbar.Collapse>
 
-          <Button variant = "outline-info" onClick = { context.toggleCartHandler } >
-            Cart &nbsp;
-            <Badge pill bg = "dark"> { context.cartItems.length } </Badge>
-          </Button>
+          <Row>
+
+            <Col>
+              {
+                userIsLoggedIn &&
+                <Button variant = "outline-info" onClick = { context.toggleCartHandler } >
+                  Cart &nbsp;
+                  <Badge pill bg = "dark"> { context.cartItems.length } </Badge>
+                </Button>
+              }
+            </Col>
+
+            <Col xs = { 2 }>
+              {
+                userIsLoggedIn && <Button variant = "outline-danger" onClick = { context.logout }> Logout </Button>
+              }
+            </Col>
+          
+          </Row> 
+
           {
             context.toggleCart && <Cart toggleCart = { context.toggleCartHandler } />
           }  
