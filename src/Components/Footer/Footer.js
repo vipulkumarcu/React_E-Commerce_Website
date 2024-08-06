@@ -20,6 +20,7 @@ function Footer ()
           <a href="#" style = { { margin: "40px" } } > <FontAwesomeIcon icon = { faSpotify } size = "2x" /> </a>
 
           <a href="#" style = { { margin: "40px" } } > <FontAwesomeIcon icon = { faShoppingCart } size = "2x" /> </a>
+          
         </Col>
 
       </Row>

@@ -4,11 +4,11 @@ import ItemContext from "../../Context/item-context";
 
 function Cart ( props )
 {
-  const context = useContext (ItemContext);
+  const context = useContext ( ItemContext );
 
   return (
     <>
-      <Modal show = { props.toggleCart } onHide = { props.toggleCart }>
+      <Modal show = { props.showCart } onHide = { props.showCart }>
 
         <Modal.Header closeButton>
           <Modal.Title> Your Cart </Modal.Title>
@@ -56,8 +56,8 @@ function Cart ( props )
         </Modal.Body>
 
         <Modal.Footer>
-          <Button variant = "outline-dark" onClick = { props.toggleCart }> Close </Button>
-          <Button variant = "outline-success" onClick = { () => { alert ("Purchase Successful"); props.toggleCart (); } }> Purchase </Button>
+          <Button variant = "outline-dark" onClick = { props.showCart }> Close </Button>
+          <Button variant = "outline-success" onClick = { () => { alert ("Purchase Successful"); props.showCart (); } }> Purchase </Button>
         </Modal.Footer>
 
       </Modal>

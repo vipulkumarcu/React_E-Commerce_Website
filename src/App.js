@@ -6,7 +6,7 @@ import About from "./Components/Pages/About";
 import Contact from "./Components/Pages/Contact";
 import ProductDetails from "./Components/Body/ProductDetails";
 import Layout from "./Layout";
-import Login from "./Components/Pages/Login";
+import Authenticate from "./Components/Pages/Authenticate";
 
 const router = createBrowserRouter (
   [
@@ -18,7 +18,7 @@ const router = createBrowserRouter (
         { path: "/store", element: <Store /> },
         { path: "/about", element: <About /> },
         { path: "/contact", element: <Contact /> },
-        { path: "/login", element: <Login /> },
+        { path: "/authenticate", element: <Authenticate /> },
         { path: "/product-details/:productId", element: <ProductDetails /> },
       ],
     },

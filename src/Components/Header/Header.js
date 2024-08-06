@@ -2,12 +2,19 @@ import { useContext } from "react";
 import { Badge, Button, Card, Col, Container, Nav, Navbar, Row } from "react-bootstrap";
 import Cart from "./Cart";
 import ItemContext from "../../Context/item-context";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 function Header ()
 {
   const context = useContext ( ItemContext );
-  const userIsLoggedIn = localStorage.getItem ( "Login Status" ); 
+  const userIsLoggedIn = localStorage.getItem ( "Login Status" );
+  const navigate = useNavigate ();
+
+  function logout ()
+  {
+    context.logoutHandler ();
+    navigate ( "/" );
+  }
 
   return (
     <div>
@@ -19,15 +26,15 @@ function Header ()
           <Navbar.Collapse id = "basic-navbar-nav">
 
             <Nav className = "mx-auto">
-              <Nav.Link as = { NavLink } to = "/" exact activeClassName="active" style = { { margin: "0 15px", fontSize: "20px" } }> HOME </Nav.Link>
+              <Nav.Link as = { NavLink } to = "/" className = { ( { isActive } ) => ( isActive ? 'active' : '' ) } style = { { margin: "0 15px", fontSize: "20px" } }> HOME </Nav.Link>
               {
-                <Nav.Link as = { NavLink } to = { userIsLoggedIn ? "/store" : "/login"} activeClassName="active" style = { { margin: "0 15px", fontSize: "20px" } }> STORE </Nav.Link>
+                <Nav.Link as = { NavLink } to = { userIsLoggedIn ? "/store" : "/authenticate"} className = { ( { isActive } ) => ( isActive ? 'active' : '' ) } style = { { margin: "0 15px", fontSize: "20px" } }> STORE </Nav.Link>
               }
-              <Nav.Link as = { NavLink } to = "/about" activeClassName="active" style = { { margin: "0 15px", fontSize: "20px" } }> ABOUT </Nav.Link>
-              <Nav.Link as = { NavLink } to = "/contact" activeClassName="active" style = { { margin: "0 15px", fontSize: "20px" } }> CONTACT US </Nav.Link>
+              <Nav.Link as = { NavLink } to = "/about" className = { ( { isActive } ) => ( isActive ? 'active' : '' ) } style = { { margin: "0 15px", fontSize: "20px" } }> ABOUT </Nav.Link>
+              <Nav.Link as = { NavLink } to = "/contact" className = { ( { isActive } ) => ( isActive ? 'active' : '' ) } style = { { margin: "0 15px", fontSize: "20px" } }> CONTACT US </Nav.Link>
               {
                 !userIsLoggedIn &&
-                <Nav.Link as = { NavLink } to = "/login" activeClassName="active" style = { { margin: "0 15px", fontSize: "20px" } }> LOGIN </Nav.Link>
+                <Nav.Link as = { NavLink } to = "/authenticate" className = { ( { isActive } ) => ( isActive ? 'active' : '' ) } style = { { margin: "0 15px", fontSize: "20px" } }> LOGIN </Nav.Link>
               }
             </Nav>
 
@@ -38,7 +45,7 @@ function Header ()
             <Col>
               {
                 userIsLoggedIn &&
-                <Button variant = "outline-info" onClick = { context.toggleCartHandler } >
+                <Button variant = "outline-info" onClick = { context.showCartHandler } >
                   Cart &nbsp;
                   <Badge pill bg = "dark"> { context.cartItems.length } </Badge>
                 </Button>
@@ -47,14 +54,14 @@ function Header ()
 
             <Col xs = { 2 }>
               {
-                userIsLoggedIn && <Button variant = "outline-danger" onClick = { context.logout }> Logout </Button>
+                userIsLoggedIn && <Button variant = "outline-danger" onClick = { logout }> Logout </Button>
               }
             </Col>
           
           </Row> 
 
           {
-            context.toggleCart && <Cart toggleCart = { context.toggleCartHandler } />
+            context.showCart && <Cart showCart = { context.showCartHandler } />
           }  
 
         </Container>

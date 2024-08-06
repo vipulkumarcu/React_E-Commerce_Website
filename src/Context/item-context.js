@@ -12,7 +12,7 @@ const ItemContext = React.createContext (
     logout: () => {},
     addItemToCart: ( item ) => {},
     removeItemFromCart: ( id ) => {},
-    toggleCartHandler: () => {}
+    showCartHandler: () => {}
   }
 )
 

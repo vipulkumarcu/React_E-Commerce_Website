@@ -23,7 +23,7 @@ function ProductDetails ()
   {
     try
     {
-      const response = await fetch("https://react-movies-demo-d927f-default-rtdb.firebaseio.com/product-reviews.json");
+      const response = await fetch ( "https://e-commerce-2a608-default-rtdb.firebaseio.com/product-reviews.json" );
 
       if ( !response.ok )
       {
@@ -80,7 +80,7 @@ function ProductDetails ()
 
     try
     {
-      const response = await fetch ("https://react-movies-demo-d927f-default-rtdb.firebaseio.com/product-reviews.json",
+      const response = await fetch ( "https://e-commerce-2a608-default-rtdb.firebaseio.com/product-reviews.json",
         {
           method: "POST",
           body: JSON.stringify ( reviewData ),
@@ -121,11 +121,11 @@ function ProductDetails ()
           <img src = { product.imageUrl } alt = { product.title } style = { { width: "80%", maxWidth: "300px", margin: "auto" } } onClick = { () => setModalShow ( true ) } />
           <Modal show = { modalShow } onHide = { () => setModalShow ( false ) } size = "lg" centered >
               <Modal.Body>
-                <img src={product.imageUrl} alt={product.title} style={{ width: "100%", height: "auto" }} />
+                <img src = { product.imageUrl } alt = { product.title } style = { { width: "100%", height: "auto" } } />
               </Modal.Body>
             </Modal>
           <p> Price: $ { product.price } </p>
-          <Button variant = "warning" onClick = { () => context.addItemToCart ( product ) } >Add To Cart </Button>
+          <Button variant = "outline-warning" onClick = { () => context.addItemToCart ( product ) } >Add To Cart </Button>
         </Col>
 
         <Col md = { 6 }>
@@ -168,7 +168,7 @@ function ProductDetails ()
               <Form.Control as = "textarea" rows = { 3 } value = { newReview } onChange = { (e) => setNewReview ( e.target.value ) } />
             </Form.Group>
 
-            <Button type = "submit" variant = "success"> Submit </Button>
+            <Button type = "submit" variant = "outline-success"> Submit </Button>
 
           </Form>
 
