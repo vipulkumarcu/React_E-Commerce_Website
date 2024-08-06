@@ -74,7 +74,7 @@ function ItemProvider ( props )
     localStorage.setItem ( "Email", email );
 
     setUserIsLoggedIn ( true );
-    localStorage.setItem ( "Login Status", userIsLoggedIn );
+    localStorage.setItem ( "Login Status", !userIsLoggedIn );
   }
 
   // Function to remove Login information from Local Storage
@@ -164,7 +164,28 @@ function ItemProvider ( props )
   {
     setCartItems (
       ( prevItems ) => {
-        const updatedItems = prevItems.filter ( ( item ) => item.title !== title );
+        const existingItemIndex = prevItems.findIndex ( ( item ) => ( item.title === title ) );
+    
+        if ( existingItemIndex === -1 )
+        {
+          return prevItems;
+        }
+    
+        const updatedItems = [ ...prevItems ];
+
+        const existingItem = updatedItems[ existingItemIndex ];
+    
+        if ( existingItem.quantity === 1 )
+        {
+          updatedItems.splice ( existingItemIndex, 1 );
+        }
+        
+        else
+        {
+          existingItem.quantity -= 1;
+          updatedItems[ existingItemIndex ] = existingItem;
+        }
+    
         updateCartDetails ( updatedItems );
         return updatedItems;
       }

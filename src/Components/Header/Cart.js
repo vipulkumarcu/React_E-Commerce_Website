@@ -37,7 +37,8 @@ function Cart ( props )
                       <td> { element.title } </td>
                       <td> $ { element.price } </td>
                       <td> { element.quantity } </td>
-                      <td> <Button variant = "outline-danger" onClick = { () => context.removeItemFromCart ( element.title ) }> Remove </Button> </td>
+                      <td> <Button variant = "outline-warning" onClick = { () => context.addItemToCart ( element ) }> + </Button> </td>
+                      <td> <Button variant = "outline-danger" onClick = { () => context.removeItemFromCart ( element.title ) }> - </Button> </td>
                     </tr>
                   )
                 )
