@@ -125,7 +125,7 @@ function ProductDetails ()
               </Modal.Body>
             </Modal>
           <p> Price: $ { product.price } </p>
-          <Button variant = "outline-warning" onClick = { () => context.addItemToCart ( product ) } >Add To Cart </Button>
+          <Button variant = "warning" onClick = { () => context.addItemToCart ( product ) } >Add To Cart </Button>
         </Col>
 
         <Col md = { 6 }>
@@ -168,7 +168,7 @@ function ProductDetails ()
               <Form.Control as = "textarea" rows = { 3 } value = { newReview } onChange = { (e) => setNewReview ( e.target.value ) } />
             </Form.Group>
 
-            <Button type = "submit" variant = "outline-success"> Submit </Button>
+            <Button type = "submit" variant = "success"> Submit </Button>
 
           </Form>
 

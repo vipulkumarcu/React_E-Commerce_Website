@@ -1,4 +1,5 @@
-import { useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useState } from "react";
 import ItemContext from "./item-context";
 import Album1 from "../Assets/Album 1.png";
 import Album2 from "../Assets/Album 2.png";
@@ -37,16 +38,25 @@ function ItemProvider ( props )
   const [ showCart, setShowCart ] = useState ( false );
 
   // Variables for Login
-  const initialToken = localStorage.getItem ("Token");
+  const initialToken = localStorage.getItem ( "Token" );
   const [ token, setToken ] = useState ( initialToken );
 
-  const initialEmail = localStorage.getItem ("Email");
+  const initialEmail = localStorage.getItem ( "Email" );
   const [ email, setEmail ] = useState ( initialEmail );
 
   const initialCartID = localStorage.getItem ( "Cart ID" );
   const [ cartID, setCartID ] = useState ( initialCartID );
 
   const [ userIsLoggedIn, setUserIsLoggedIn ] = useState ( !!initialToken );
+
+  useEffect (
+    () => {
+      if ( email )
+      {
+        fetchCartItems ( email );
+      }
+    }, [ email ]
+  );
 
   // Function to Toggle Cart Visibility 
   function showCartHandler ()
@@ -65,8 +75,6 @@ function ItemProvider ( props )
 
     setUserIsLoggedIn ( true );
     localStorage.setItem ( "Login Status", userIsLoggedIn );
-
-    fetchCartItems ( email );
   }
 
   // Function to remove Login information from Local Storage
@@ -81,27 +89,44 @@ function ItemProvider ( props )
     localStorage.removeItem ( "Email" );
 
     setCartID ( null );
-    localStorage.removeItem ( "Cart ID" )
+    localStorage.removeItem ( "Cart ID" );
+
+    setUserIsLoggedIn ( false );
+    setCartItems ( [] );
+    setCartQuantity ( 0 );
+    setCartPrice ( 0 );
   }
 
   // Function to fetch data from the database
   async function fetchCartItems ( email )
-  {
+  { 
     const response = await fetch ( "https://e-commerce-2a608-default-rtdb.firebaseio.com/user-cart-details.json" );
 
     const data = await response.json ();
+
+    let foundCartID = null;
     
     for ( const key in data )
     {
       if ( data[key].email === email )
       {
-        setCartItems ( data[key].cart );
-        setCartQuantity ( data[key].quantity );
-        setCartPrice ( data[key].total );
-        setCartID ( key );
-        localStorage.setItem ( "Cart ID", key );
+        foundCartID = key;
+        setCartItems ( data[key].cart || [] );
+        setCartQuantity ( data[key].quantity || 0 );
+        setCartPrice ( data[key].total || 0);
         break;
       }
+    }
+
+    if ( foundCartID )
+    {
+      setCartID ( foundCartID );
+      localStorage.setItem ( "Cart ID", foundCartID );
+    }
+    
+    else
+    {
+      createCart ( email );
     }
   }
 
@@ -146,79 +171,75 @@ function ItemProvider ( props )
     );
   }
 
-  // Function to Add and Update Database
+  // Function to Update Cart Items in the Database
   async function saveCartDetails ( cart, quantity, total )
   {
-    if ( cartID )
+    const response = await fetch ( `https://e-commerce-2a608-default-rtdb.firebaseio.com/user-cart-details/${cartID}.json`,
+      {
+        method: "PUT",
+        body: JSON.stringify (
+          {
+            email: email,
+            cart: cart,
+            quantity: quantity,
+            total: total,
+          }
+        ),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const data = await response.json ();
+
+    if ( response.ok )
     {
-      const response = await fetch ( `https://e-commerce-2a608-default-rtdb.firebaseio.com/user-cart-details/${cartID}.json`,
-        {
-          method: "PUT",
-          body: JSON.stringify (
-            {
-              email: email,
-              cart: cart,
-              quantity: quantity,
-              total: total,
-            }
-          ),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      const data = await response.json ();
-
-      if ( response.ok )
-      {
-        console.log ( data );
-        console.log ( "Cart Update Successful for ", cartID );
-      }
-      
-      else
-      {
-        console.log ( "Cart Update Unsuccessful for ", cartID );
-      }
+      console.log ( "Cart Update Successful for ", data.name );
     }
     
     else
     {
-      const response = await fetch ( "https://e-commerce-2a608-default-rtdb.firebaseio.com/user-cart-details.json",
-        {
-          method: "POST",
-          body: JSON.stringify (
-            {
-              email: email,
-              cart: cart,
-              quantity: quantity,
-              total: total,
-            }
-          ),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      const data = await response.json ();
-
-      if ( response.ok )
-      {
-        console.log ( data.name );
-        setCartID ( data.name );
-        localStorage.setItem ( "Cart ID", data.name );
-        console.log ( "Cart Created Successfully for ", data.name );
-      }
-      
-      else
-      {
-        console.log ( "Cart Creation Unsuccessful" );
-      }
+      console.log ( "Cart Update Unsuccessful for " );
     }
   }
 
-  // Function that updates Cart and also updates database
+  // Function to Create Cart Object in the Database
+  async function createCart ( email, cart, quantity, total )
+  {
+    const response = await fetch ( "https://e-commerce-2a608-default-rtdb.firebaseio.com/user-cart-details.json",
+      {
+        method: "POST",
+        body: JSON.stringify (
+          {
+            email: email,
+            cart: [],
+            quantity: 0,
+            total: 0,
+          }
+        ),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const data = await response.json ();
+
+    if ( response.ok )
+    {
+      setCartID ( data.name )
+      localStorage.setItem ( "Cart ID", data.name );
+      console.log ( "Cart Created Successfully for ", data.name );
+    }
+    
+    else
+    {
+      console.log ( "Cart Creation Unsuccessful" );
+    }
+  }
+
+  // Function that updates Cart in application
   function updateCartDetails ( items )
   {
     const totalQuantity = items.reduce ( ( total, item ) => total + item.quantity, 0 );
