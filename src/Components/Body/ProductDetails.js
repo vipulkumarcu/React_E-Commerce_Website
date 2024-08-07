@@ -95,9 +95,14 @@ function ProductDetails ()
         throw new Error ( "Failed to submit review" );
       }
 
+      else
+      {
+        setAlertMessage ( "Review added successfully" );
+        setAlertVariant ( "success" );
+      }
+
       setNewReview ( "" );
       await fetchReviews ();
-
     }
     
     catch ( error )
@@ -110,29 +115,37 @@ function ProductDetails ()
 
     <Container>
 
-      <Button className = "shadow" variant = "secondary" onClick = { () => navigate ( "/store" ) } style=  { { marginBottom: "20px" } }>
+      <Button className = "shadow" variant = "info" onClick = { () => navigate ( "/store" ) } style=  { { marginBottom: "20px" } }>
         Back to Products        
       </Button>
 
       <Row>
 
         <Col md = { 6 } style = { { textAlign: "center" } } >
+
           <h1> { product.title } </h1>
-          <img class = "shadow-lg p-3" src = { product.imageUrl } alt = { product.title } style = { { width: "80%", maxWidth: "300px", margin: "auto", backgroundColor: "#C0C0C0" } } onClick = { () => setModalShow ( true ) } />
+
+          <img className = "shadow-lg p-3" src = { product.imageUrl } alt = { product.title } style = { { width: "80%", maxWidth: "300px", margin: "auto", backgroundColor: "#C0C0C0" } } onClick = { () => setModalShow ( true ) } />
+          
           <Modal show = { modalShow } onHide = { () => setModalShow ( false ) } size = "lg" centered >
-              <Modal.Body>
-                <img src = { product.imageUrl } alt = { product.title } style = { { width: "100%", height: "auto" } } />
-              </Modal.Body>
-            </Modal>
+            <Modal.Header className = "shadow" closeButton />
+            <Modal.Body>
+              <img className = "shadow" src = { product.imageUrl } alt = { product.title } style = { { width: "100%", height: "auto" } } />
+            </Modal.Body>
+            <Modal.Footer />
+          </Modal>
+          
           <p> Price: $ { product.price } </p>
+
           <Button className = "shadow-lg" variant = "warning" onClick = { () => context.addItemToCart ( product ) } > Add To Cart </Button>
+        
         </Col>
 
         <Col md = { 6 }>
         
           <h2> Reviews </h2>
 
-          <div class = "shadow" style = { { maxHeight: "300px", overflowY: "scroll", border: "1px solid #ddd", padding: "10px", borderRadius: "5px", marginBottom: "20px", backgroundColor: "#A9A9A9" } } >
+          <div className = "shadow" style = { { maxHeight: "300px", overflowY: "scroll", border: "1px solid #ddd", padding: "10px", borderRadius: "5px", marginBottom: "20px", backgroundColor: "#A9A9A9" } } >
 
             { loading && <p> Loading reviews... </p> }
 
@@ -148,7 +161,7 @@ function ProductDetails ()
             {
               reviews.map ( ( review, index ) =>
                 (
-                  <div class = "shadow" key = { index } style = { { border: "1px solid #ddd", borderRadius: "4px", padding: "10px", marginBottom: "10px", backgroundColor: "#D3D3D3" } } >
+                  <div className = "shadow" key = { index } style = { { border: "1px solid #ddd", borderRadius: "4px", padding: "10px", marginBottom: "10px", backgroundColor: "#D3D3D3" } } >
                     <p> { review.review } </p>
                   </div>
                 )

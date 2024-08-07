@@ -8,15 +8,15 @@ function Cart ( props )
 
   return (
     <>
-      <Modal show = { props.showCart } onHide = { props.showCart }>
+      <Modal show = { props.showCart } onHide = { props.showCart } >
 
-        <Modal.Header closeButton>
+        <Modal.Header className = "shadow" closeButton>
           <Modal.Title> Your Cart </Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
 
-          <Table striped = "columns" bordered  hover  style = { { textAlign: "center" } }>
+          <Table className = "shadow" striped = "columns" bordered  hover >
 
             <thead>
               <tr>
@@ -32,23 +32,24 @@ function Cart ( props )
               {
                 context.cartItems.map (
                   ( element, index ) => (
-                    <tr key = { element.title }>
+                    <tr className = "shadow" key = { element.title }>
                       <td> { ++index } </td>
                       <td> { element.title } </td>
                       <td> $ { element.price } </td>
                       <td> { element.quantity } </td>
-                      <td> <Button variant = "outline-warning" onClick = { () => context.addItemToCart ( element ) }> + </Button> </td>
-                      <td> <Button variant = "outline-danger" onClick = { () => context.removeItemFromCart ( element.title ) }> - </Button> </td>
+                      <td> <Button className = "shadow" variant = "warning" onClick = { () => context.addItemToCart ( element ) }> + </Button> </td>
+                      <td> <Button className = "shadow" variant = "danger" onClick = { () => context.removeItemFromCart ( element.title ) }> - </Button> </td>
                     </tr>
                   )
                 )
               }
             </tbody>
 
-            <tfoot>
+            <tfoot className = "shadow">
               <tr>
                 <td colSpan = { 2 }> Total Price </td>
                 <td> $ { context.cartPrice } </td>
+                <td colSpan = { 4 }></td>
               </tr>
             </tfoot>
 
@@ -56,9 +57,9 @@ function Cart ( props )
 
         </Modal.Body>
 
-        <Modal.Footer>
-          <Button variant = "outline-dark" onClick = { props.showCart }> Close </Button>
-          <Button variant = "outline-success" onClick = { () => { alert ("Purchase Successful"); props.showCart (); } }> Purchase </Button>
+        <Modal.Footer className = "shadow" >
+          <Button className = "shadow" variant = "outline-dark" onClick = { props.showCart }> Close </Button>
+          <Button className = "shadow" variant = "outline-success" onClick = { () => { alert ("Purchase Successful"); props.showCart (); } }> Purchase </Button>
         </Modal.Footer>
 
       </Modal>
