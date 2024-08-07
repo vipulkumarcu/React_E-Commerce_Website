@@ -132,7 +132,7 @@ function ProductDetails ()
         
           <h2> Reviews </h2>
 
-          <div class="shadow" style={{ maxHeight: "300px", overflowY: "scroll", border: "1px solid #ddd", padding: "10px", borderRadius: "5px", marginBottom: "20px", backgroundColor: "#A9A9A9" }}>
+          <div class = "shadow" style = { { maxHeight: "300px", overflowY: "scroll", border: "1px solid #ddd", padding: "10px", borderRadius: "5px", marginBottom: "20px", backgroundColor: "#A9A9A9" } } >
 
             { loading && <p> Loading reviews... </p> }
 
@@ -140,7 +140,7 @@ function ProductDetails ()
 
             {
               reviews.length === 0 && !loading && !error && 
-              <div class = "shadow" style = { { border: "1px solid #ddd", borderRadius: "4px", padding: "10px", marginBottom: "10px", backgroundColor: "#D3D3D3" } }>
+              <div class = "shadow" style = { { border: "1px solid #ddd", borderRadius: "4px", padding: "10px", marginBottom: "10px", backgroundColor: "#D3D3D3" } } >
                 <p> No reviews found. </p>
               </div> 
             }
@@ -160,7 +160,7 @@ function ProductDetails ()
           {
             alertMessage && 
             (
-              <Alert variant = { alertVariant } onClose = { () => setAlertMessage ( "" ) } dismissible >
+              <Alert className = "shadow-lg" variant = { alertVariant } onClose = { () => setAlertMessage ( "" ) } dismissible >
                 { alertMessage }
               </Alert>
             )

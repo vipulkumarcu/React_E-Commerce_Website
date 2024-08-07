@@ -29,7 +29,7 @@ function Home ()
       {
         alertMessage && 
         (
-          <Alert variant = "dark" onClose = { () => setAlertMessage ( "" ) } dismissible >
+          <Alert className = "shadow" variant = "dark" onClose = { () => setAlertMessage ( "" ) } dismissible >
             { alertMessage }
           </Alert>
         )

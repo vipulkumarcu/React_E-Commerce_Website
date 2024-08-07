@@ -80,11 +80,11 @@ function Authenticate ()
       <Form onSubmit = { submitHandler }>
 
         {
-          error && <Alert variant = "danger" dismissible> { error } </Alert>
+          error && <Alert className = "shadow" variant = "danger" dismissible> { error } </Alert>
         }
 
         {
-          isLoading && <Alert variant="info"> { isLoginMode ? 'Logging in...' : 'Signing up...' } </Alert>
+          isLoading && <Alert className = "shadow" variant="info"> { isLoginMode ? 'Logging in...' : 'Signing up...' } </Alert>
         }
 
         <Form.Floating className = "shadow mb-3">
