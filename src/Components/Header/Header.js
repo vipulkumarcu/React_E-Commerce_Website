@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Badge, Button, Card, Col, Container, Nav, Navbar, Row } from "react-bootstrap";
 import Cart from "./Cart";
 import ItemContext from "../../Context/item-context";
@@ -9,6 +9,18 @@ function Header ()
   const context = useContext ( ItemContext );
   const userIsLoggedIn = localStorage.getItem ( "Login Status" );
   const navigate = useNavigate ();
+
+  const [ showCart, setShowCart ] = useState ( false );
+
+  const navStyling = {
+    margin: "0 15px",
+    fontSize: "20px"
+  };
+
+  function showCartHandler ()
+  {  
+    setShowCart ( ( prevValue ) => ( !prevValue ) );
+  }
 
   function logout ()
   {
@@ -26,15 +38,15 @@ function Header ()
           <Navbar.Collapse id = "basic-navbar-nav">
 
             <Nav className = "mx-auto">
-              <Nav.Link as = { NavLink } to = "/" className = { ( { isActive } ) => ( isActive ? 'active' : '' ) } style = { { margin: "0 15px", fontSize: "20px" } }> HOME </Nav.Link>
+              <Nav.Link as = { NavLink } to = "/" className = { ( { isActive } ) => ( isActive ? 'active' : '' ) } style = { navStyling }> HOME </Nav.Link>
               {
-                <Nav.Link as = { NavLink } to = { userIsLoggedIn ? "/store" : "/authenticate"} className = { ( { isActive } ) => ( isActive ? 'active' : '' ) } style = { { margin: "0 15px", fontSize: "20px" } }> STORE </Nav.Link>
+                <Nav.Link as = { NavLink } to = { userIsLoggedIn ? "/store" : "/authenticate"} className = { ( { isActive } ) => ( isActive ? 'active' : '' ) } style = { navStyling }> STORE </Nav.Link>
               }
-              <Nav.Link as = { NavLink } to = "/about" className = { ( { isActive } ) => ( isActive ? 'active' : '' ) } style = { { margin: "0 15px", fontSize: "20px" } }> ABOUT </Nav.Link>
-              <Nav.Link as = { NavLink } to = "/contact" className = { ( { isActive } ) => ( isActive ? 'active' : '' ) } style = { { margin: "0 15px", fontSize: "20px" } }> CONTACT US </Nav.Link>
+              <Nav.Link as = { NavLink } to = "/about" className = { ( { isActive } ) => ( isActive ? 'active' : '' ) } style = { navStyling }> ABOUT </Nav.Link>
+              <Nav.Link as = { NavLink } to = "/contact" className = { ( { isActive } ) => ( isActive ? 'active' : '' ) } style = { navStyling }> CONTACT US </Nav.Link>
               {
                 !userIsLoggedIn &&
-                <Nav.Link as = { NavLink } to = "/authenticate" className = { ( { isActive } ) => ( isActive ? 'active' : '' ) } style = { { margin: "0 15px", fontSize: "20px" } }> LOGIN </Nav.Link>
+                <Nav.Link as = { NavLink } to = "/authenticate" className = { ( { isActive } ) => ( isActive ? 'active' : '' ) } style = { navStyling }> LOGIN </Nav.Link>
               }
             </Nav>
 
@@ -45,23 +57,23 @@ function Header ()
             <Col>
               {
                 userIsLoggedIn &&
-                <Button variant = "outline-info" onClick = { context.showCartHandler } >
+                <Button  className = "shadow" variant = "outline-info" onClick = { showCartHandler } >
                   Cart &nbsp;
-                  <Badge pill bg = "dark"> { context.cartItems.length } </Badge>
+                  <Badge className = "shadow" pill bg = "dark"> { context.cartItems.length } </Badge>
                 </Button>
               }
             </Col>
 
             <Col xs = { 2 }>
               {
-                userIsLoggedIn && <Button variant = "outline-danger" onClick = { logout }> Logout </Button>
+                userIsLoggedIn && <Button  className = "shadow" variant = "outline-danger" onClick = { logout }> Logout </Button>
               }
             </Col>
           
           </Row> 
 
           {
-            context.showCart && <Cart showCart = { context.showCartHandler } />
+            showCart && <Cart showCart = { showCartHandler } />
           }  
 
         </Container>

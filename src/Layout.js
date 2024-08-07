@@ -8,7 +8,7 @@ function Layout ()
     <>
       <Header />
 
-      <main style = { { padding: "20px" } }>
+      <main style = { { padding: "20px", backgroundColor: "#e7fbf9" } }>
         <Outlet />
       </main>
 

@@ -87,24 +87,24 @@ function Authenticate ()
           isLoading && <Alert variant="info"> { isLoginMode ? 'Logging in...' : 'Signing up...' } </Alert>
         }
 
-        <Form.Floating className = "mb-3">
-          <Form.Control size="lg" id = "email" type = "email" ref = { inputEmailRef } placeholder = "Enter your email" required/>
+        <Form.Floating className = "shadow mb-3">
+          <Form.Control size = "lg" id = "email" type = "email" ref = { inputEmailRef } placeholder = "Enter your email" required/>
           <label htmlFor = "floatingInputCustom"> Email address </label>
         </Form.Floating>
 
-        <Form.Floating className = "mb-3">
-          <Form.Control size="lg" id = "password" type = "password" ref = { inputPasswordRef } placeholder = "Enter your password" required/>
+        <Form.Floating className = "shadow mb-3">
+          <Form.Control size = "lg" id = "password" type = "password" ref = { inputPasswordRef } placeholder = "Enter your password" required/>
           <label htmlFor = "floatingInputCustom"> Password </label>
         </Form.Floating>
         
-        <Button variant = "outline-primary" type = "submit" disabled = { isLoading }>  
+        <Button className = "shadow" variant = "outline-primary" type = "submit" disabled = { isLoading }>  
           { isLoginMode ? 'Login' : 'Signup' }
         </Button>
 
       </Form>
 
       <Container style = { { textAlign: "center", padding: "15px" } }>
-        <Button variant = "outline-primary" type = "submit" onClick = { () => setIsLoginMode ( prev => !prev ) } >
+        <Button className = "shadow" variant = "outline-primary" type = "submit" onClick = { () => setIsLoginMode ( prev => !prev ) } >
         { isLoginMode ? 'Create new account' : 'Login with existing account' }
         </Button>
       </Container>

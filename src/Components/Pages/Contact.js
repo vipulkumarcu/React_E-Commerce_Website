@@ -69,27 +69,27 @@ function Contact ( props )
 
       <Form onSubmit = { onSubmitHandler } >
 
-        <Form.Floating className = "mb-3">
+        <Form.Floating className = "shadow mb-3">
           <Form.Control id = "floatingInputCustom" type= "text" value = { name } onChange = { ( e ) => ( setName ( e.target.value ) ) } placeholder = "Enter your name" />
           <label htmlFor = "floatingInputCustom"> Name </label>
         </Form.Floating>
 
-        <Form.Floating className = "mb-3">
+        <Form.Floating className = "shadow mb-3">
           <Form.Control id = "floatingInputCustom" type = "email" value = { email } onChange = { ( e ) => ( setEmail ( e.target.value ) ) } placeholder = "Enter your email" />
           <label htmlFor = "floatingInputCustom"> Email address </label>
         </Form.Floating>
 
-        <Form.Floating className = "mb-3">
+        <Form.Floating className = "shadow mb-3">
           <Form.Control id = "floatingInputCustom" type = "text" value = { phone } onChange = { ( e ) => ( setPhone ( e.target.value ) ) } placeholder = "Enter your phone number" />
           <label htmlFor = "floatingInputCustom"> Contact Number </label>
         </Form.Floating>
 
-        <Form.Floating className = "mb-3">
+        <Form.Floating className = "shadow mb-3">
           <Form.Control id = "floatingInputCustom" as = "textarea" rows = { 3 } value = { query } onChange = { ( e ) => ( setQuery ( e.target.value ) ) } placeholder = "Enter your query here" style = { { height: "100px" } } />
           <label htmlFor = "floatingInputCustom"> Query </label>
         </Form.Floating>
 
-        <Button type = "submit" variant = "outline-primary"> Contact </Button>
+        <Button className = "shadow-lg" type = "submit" variant = "outline-primary"> Contact </Button>
 
       </Form>
 

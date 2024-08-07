@@ -9,33 +9,16 @@ import Album4 from "../Assets/Album 4.png";
 function ItemProvider ( props )
 {
   const productsArr = [
-    {
-      title: 'Album1',
-      price: 100,
-      imageUrl: Album1,
-    },
-    {
-      title: 'Album2',
-      price: 50,
-      imageUrl: Album2,
-    },
-    {
-      title: 'Album3',
-      price: 70,
-      imageUrl: Album3,
-    },
-    {
-      title: 'Album4',
-      price: 100,
-      imageUrl: Album4,
-    }
+    { title: 'Album1', price: 100, imageUrl: Album1, },
+    { title: 'Album2', price: 50, imageUrl: Album2, },
+    { title: 'Album3', price: 70, imageUrl: Album3, },
+    { title: 'Album4', price: 100, imageUrl: Album4, }
   ];
 
   // Variables for Cart
   const [ cartItems, setCartItems ] = useState ( [] );
   const [ cartQuantity, setCartQuantity ] = useState ( 0 );
   const [ cartPrice, setCartPrice ] = useState ( 0 );
-  const [ showCart, setShowCart ] = useState ( false );
 
   // Variables for Login
   const initialToken = localStorage.getItem ( "Token" );
@@ -58,12 +41,6 @@ function ItemProvider ( props )
     }, [ email ]
   );
 
-  // Function to Toggle Cart Visibility 
-  function showCartHandler ()
-  {  
-    setShowCart ( ( prevValue ) => ( !prevValue ) );
-  }
-
   // Function to store Login information in Local Storage
   function loginHandler ( token, email )
   {
@@ -83,6 +60,7 @@ function ItemProvider ( props )
     setToken ( null );
     localStorage.removeItem ( "Token" );
 
+    setUserIsLoggedIn ( false );
     localStorage.removeItem ( "Login Status", userIsLoggedIn );
 
     setEmail( null );
@@ -91,7 +69,6 @@ function ItemProvider ( props )
     setCartID ( null );
     localStorage.removeItem ( "Cart ID" );
 
-    setUserIsLoggedIn ( false );
     setCartItems ( [] );
     setCartQuantity ( 0 );
     setCartPrice ( 0 );
@@ -277,14 +254,12 @@ function ItemProvider ( props )
     cartItems,
     cartQuantity,
     cartPrice,
-    showCart,
     token,
     userIsLoggedIn,
     loginHandler,
     logoutHandler,
     addItemToCart,
     removeItemFromCart,
-    showCartHandler,
   };
 
   return (

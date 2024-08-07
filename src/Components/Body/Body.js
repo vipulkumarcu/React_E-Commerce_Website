@@ -24,9 +24,9 @@ function Body ()
 
       <Row>
         <Col style = { { textAlign: "center", margin: "25px" } }>
-          <Button variant = "outline-dark" onClick = { context.toggleCartHandler } > 
+          <Button className = "shadow-lg" variant = "outline-dark" onClick = { context.toggleCartHandler } > 
             See Cart &nbsp;
-            <Badge pill bg = "info"> { context.cartItems.length } </Badge>
+            <Badge className = "shadow" pill bg = "info"> { context.cartItems.length } </Badge>
           </Button>
         </Col>
       </Row>

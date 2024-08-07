@@ -16,7 +16,7 @@ function Cart ( props )
 
         <Modal.Body>
 
-          <Table striped>
+          <Table striped = "columns" bordered  hover  style = { { textAlign: "center" } }>
 
             <thead>
               <tr>
@@ -24,7 +24,7 @@ function Cart ( props )
                 <th>Item</th>
                 <th>Price</th>
                 <th>Quantity</th>
-                <th></th>
+                <th colSpan = { 2 }></th>
               </tr>
             </thead>
 
